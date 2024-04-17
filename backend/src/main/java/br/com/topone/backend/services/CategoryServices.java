@@ -40,4 +40,15 @@ public class CategoryServices {
                 new ResourceNotFoundException("Entidade não encontrada"));
         return new CategoryDTO(category);
     }
+    
+    /**
+     * Inserir categoria
+     * */
+    @Transactional
+    public CategoryDTO insert(CategoryDTO dto) {
+        Category entity = new Category();
+        entity.setName(dto.name());
+        entity = repository.save(entity);
+        return new CategoryDTO(entity);
+    }
 }
