@@ -1,5 +1,6 @@
 package br.com.topone.backend.resources;
 
+import br.com.topone.backend.dtos.CategoryDTO;
 import br.com.topone.backend.entities.Category;
 import br.com.topone.backend.services.CategoryServices;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class CategoryResource {
     }
     
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<CategoryDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
     

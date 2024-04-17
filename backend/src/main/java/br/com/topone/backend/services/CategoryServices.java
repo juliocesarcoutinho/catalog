@@ -1,8 +1,10 @@
 package br.com.topone.backend.services;
 
+import br.com.topone.backend.dtos.CategoryDTO;
 import br.com.topone.backend.entities.Category;
 import br.com.topone.backend.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,8 +20,10 @@ public class CategoryServices {
     /**
      * Listar todas as categorias
      * */
-    public List<Category> findAll() {
-        return repository.findAll();
+    @Transactional(readOnly = true)
+    public List<CategoryDTO> findAll() {
+        List<Category> list = repository.findAll();
+        return list.stream().map(CategoryDTO::new).toList();
     }
     
 }
