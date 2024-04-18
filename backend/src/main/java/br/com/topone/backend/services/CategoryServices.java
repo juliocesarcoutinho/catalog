@@ -5,6 +5,7 @@ import br.com.topone.backend.entities.Category;
 import br.com.topone.backend.repositories.CategoryRepository;
 import br.com.topone.backend.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,16 @@ public class CategoryServices {
         entity.setName(dto.name());
         entity = repository.save(entity);
         return new CategoryDTO(entity);
+    }
+    
+    /**
+     * Atualizar categoria
+     * */
+    @Transactional
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+        Category category = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id: " + id + ", não encontrado"));
+        BeanUtils.copyProperties(dto, category, "id");
+        category = repository.save(category);
+        return new CategoryDTO(category);
     }
 }

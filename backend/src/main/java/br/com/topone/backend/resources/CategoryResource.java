@@ -1,15 +1,12 @@
 package br.com.topone.backend.resources;
 
 import br.com.topone.backend.dtos.CategoryDTO;
-import br.com.topone.backend.entities.Category;
 import br.com.topone.backend.services.CategoryServices;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -41,6 +38,13 @@ public class CategoryResource {
                                 .buildAndExpand(updatedDto.id())
                                 .toUri())
                 .body(updatedDto);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable("id") Long id,
+                                              @RequestBody CategoryDTO dto) {
+        dto = service.update(id, dto);
+        return ResponseEntity.ok().body(dto);
     }
     
 }
