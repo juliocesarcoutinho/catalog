@@ -19,7 +19,7 @@ public class ResourcesExceptionHandler {
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Recurso não encontrado");
+        error.setError("Resource not found");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
         
@@ -33,7 +33,7 @@ public class ResourcesExceptionHandler {
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Violacao de integridade");
+        error.setError("Database exception");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 

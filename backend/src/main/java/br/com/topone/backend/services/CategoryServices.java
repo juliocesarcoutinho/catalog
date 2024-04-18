@@ -3,9 +3,11 @@ package br.com.topone.backend.services;
 import br.com.topone.backend.dtos.CategoryDTO;
 import br.com.topone.backend.entities.Category;
 import br.com.topone.backend.repositories.CategoryRepository;
+import br.com.topone.backend.services.exceptions.DataBaseException;
 import br.com.topone.backend.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -63,4 +65,18 @@ public class CategoryServices {
         category = repository.save(category);
         return new CategoryDTO(category);
     }
+    
+    /**
+     * Deletar categoria
+     * */
+    public void delete(Long id) {
+        Category category = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Id: " + id + ", não encontrado"));
+        try {
+            repository.delete(category);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataBaseException("Violação de integridade de banco de dados");
+        }
+    } 
+    
 }
