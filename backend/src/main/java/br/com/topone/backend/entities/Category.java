@@ -38,5 +38,11 @@ public class Category implements Serializable {
     public void preUpdate() {
         updatedAt = Instant.now();
     }
+    
+    public Category(Long id, String name, Instant createdAt) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+    }
 
 }
