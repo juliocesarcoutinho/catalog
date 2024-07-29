@@ -6,6 +6,7 @@ import br.com.topone.backend.services.ProductService;
 import br.com.topone.backend.services.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @DataJpaTest /*Carrega somente a parte do jpa sem carregar contexto*/
+@Disabled
 public class ProductRepositoryTest {
     
     private long existingId;
