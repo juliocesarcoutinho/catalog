@@ -16,7 +16,6 @@ public record ProductDTO(
         @Size(min = 5, max = 160, message = "Name must be between 3 and 160 characters")
         String name,
         
-        @NotBlank(message = "Price is required")
         @Positive(message = "Price must be positive")
         Double price,
         String description,
