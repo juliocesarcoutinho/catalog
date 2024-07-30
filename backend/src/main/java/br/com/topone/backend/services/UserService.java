@@ -2,7 +2,7 @@ package br.com.topone.backend.services;
 
 import br.com.topone.backend.dtos.RoleDTO;
 import br.com.topone.backend.dtos.UserDTO;
-import br.com.topone.backend.dtos.UsertInsertDTO;
+import br.com.topone.backend.dtos.UserInsertDTO;
 import br.com.topone.backend.entities.Role;
 import br.com.topone.backend.entities.User;
 import br.com.topone.backend.repositories.RoleRepository;
@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.HashSet;
 
@@ -48,7 +47,7 @@ public class UserService {
 
     //Inserir usuário
     @Transactional
-    public UserDTO insert(UsertInsertDTO dto) {
+    public UserDTO insert(UserInsertDTO dto) {
         User entity = new User();
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
@@ -57,7 +56,7 @@ public class UserService {
 
     //Atualizar usuário
     @Transactional
-    public UserDTO update(Long id, UsertInsertDTO dto) {
+    public UserDTO update(Long id, UserInsertDTO dto) {
         User usuario = repository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Usuário não encontrado com id: " + id));
         usuario.getRoles().clear();
@@ -77,7 +76,7 @@ public class UserService {
     }
 
     //Copiar dados do DTO para a entidade
-    private void copyDtoToEntity(UsertInsertDTO dto, User entity) {
+    private void copyDtoToEntity(UserInsertDTO dto, User entity) {
         BeanUtils.copyProperties(dto, entity, "id", "roles", "password");
         if (entity.getRoles() == null) {
             entity.setRoles(new HashSet<>());

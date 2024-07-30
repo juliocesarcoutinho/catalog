@@ -2,6 +2,7 @@ package br.com.topone.backend.resources;
 
 import br.com.topone.backend.dtos.ProductDTO;
 import br.com.topone.backend.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,7 +59,7 @@ public class ProductResource {
 //    }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
         var updatedDto = productService.insert(dto);
         return ResponseEntity.created(
                         ServletUriComponentsBuilder.fromCurrentRequest()
@@ -69,7 +70,7 @@ public class ProductResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> update(@PathVariable("id") Long id,
+    public ResponseEntity<ProductDTO> update(@Valid @PathVariable("id") Long id,
                                              @RequestBody ProductDTO dto) {
         dto = productService.update(id, dto);
         return ResponseEntity.ok().body(dto);

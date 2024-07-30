@@ -1,8 +1,7 @@
 package br.com.topone.backend.resources;
 
-import br.com.topone.backend.dtos.ProductDTO;
 import br.com.topone.backend.dtos.UserDTO;
-import br.com.topone.backend.dtos.UsertInsertDTO;
+import br.com.topone.backend.dtos.UserInsertDTO;
 import br.com.topone.backend.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -38,7 +37,8 @@ public class UserResource {
 
     //Inserir usuário
     @PostMapping
-    public ResponseEntity<UserDTO> inserir(@RequestBody @Valid UsertInsertDTO dto) {
+    public ResponseEntity<UserDTO> inserir(@Valid 
+                                           @RequestBody UserInsertDTO dto) {
         UserDTO novoDto = userService.insert(dto);
         return ResponseEntity.created(
                         ServletUriComponentsBuilder.fromCurrentRequest()
@@ -51,8 +51,8 @@ public class UserResource {
     //Atualizar usuário
     @PutMapping(value = "/{id}")
     public ResponseEntity<UserDTO> atualizar(@PathVariable("id") Long id, 
-                                                @RequestBody 
-                                                @Valid UsertInsertDTO dto) {
+                                             @Valid
+                                             @RequestBody UserInsertDTO dto) {
         UserDTO novoDto = userService.update(id, dto);
         return ResponseEntity.ok().body(novoDto);
     }
