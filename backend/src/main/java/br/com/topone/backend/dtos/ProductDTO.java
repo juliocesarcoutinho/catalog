@@ -13,7 +13,7 @@ public record ProductDTO(
         Long id,
 
         @NotBlank(message = "Name is required")
-        @Size(min = 5, max = 160, message = "Name must be between 3 and 160 characters")
+        @Size(min = 5, max = 160, message = "Name must be between 5 and 160 characters")
         String name,
         
         @Positive(message = "Price must be positive")

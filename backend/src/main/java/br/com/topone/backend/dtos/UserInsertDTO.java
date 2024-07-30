@@ -2,6 +2,7 @@ package br.com.topone.backend.dtos;
 
 import br.com.topone.backend.entities.Role;
 import br.com.topone.backend.entities.User;
+import br.com.topone.backend.services.validations.UserInsertValid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+@UserInsertValid
 public record UserInsertDTO(
         Long id,
         
